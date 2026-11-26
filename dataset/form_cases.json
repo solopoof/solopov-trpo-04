@@ -1,5 +1,0 @@
-[
-  {"case":"empty_name","name":"","experience":2,"valid":false},
-  {"case":"bad_experience","name":"Иван","experience":-2,"valid":false},
-  {"case":"valid","name":"Иван","experience":4,"valid":true}
-]
