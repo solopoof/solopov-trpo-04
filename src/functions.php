@@ -5,7 +5,7 @@ function employeeFromCsvRow(array $r):array{return ['id'=>(int)($r['id']??0),'na
 function loadEmployees(string $file):array{
  if(!is_file($file)||!is_readable($file))throw new RuntimeException('Файл employees.csv отсутствует или недоступен.');
  $h=fopen($file,'rb');if(!$h)throw new RuntimeException('Не удалось открыть employees.csv.');
- try{$head=fgetcsv($h,null,';');if(!is_array($head))throw new RuntimeException('Нет заголовка CSV.');$head[0]=preg_replace('/^\xEF\xBB\xBF/','',(string)$head[0]);if($head!==['id','name','department','experience','email'])throw new RuntimeException('Неверная структура employees.csv.');$out=[];while(($r=fgetcsv($h,null,';'))!==false){if(count($r)===count($head))$out[]=employeeFromCsvRow(array_combine($head,$r));}return $out;}finally{fclose($h);}
+ try{$head=fgetcsv($h,null,';','"','');if(!is_array($head))throw new RuntimeException('Нет заголовка CSV.');$head[0]=preg_replace('/^\xEF\xBB\xBF/','',(string)$head[0]);if($head!==['id','name','department','experience','email'])throw new RuntimeException('Неверная структура employees.csv.');$out=[];while(($r=fgetcsv($h,null,';','"',''))!==false){if(count($r)===count($head))$out[]=employeeFromCsvRow(array_combine($head,$r));}return $out;}finally{fclose($h);}
 }
 function validateInput(array $in):array{
  $v=['name'=>trim((string)($in['name']??'')),'email'=>trim((string)($in['email']??'')),'department'=>trim((string)($in['department']??'')),'experience'=>trim((string)($in['experience']??''))];$e=[];
