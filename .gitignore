@@ -1,0 +1,5 @@
+storage/*.csv
+*.log
+.DS_Store
+.vscode/
+.idea/
